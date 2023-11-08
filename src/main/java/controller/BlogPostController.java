@@ -12,27 +12,40 @@ public class BlogPostController {
     @Autowired
     private BlogPostService blogpostService;
 
-    @PostMapping("")
+
+    @PostMapping("")//CREA
     @ResponseStatus(HttpStatus.CREATED)
     public BlogPost postBlogPosts(@RequestBody BlogPost blogpost) {
         return blogpostService.save(blogpost);
+
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}")//GETBYID
     @ResponseStatus(HttpStatus.FOUND)
     public BlogPost getBlogPostById(@PathVariable int id) {
-        try {
-            return BlogPostService.findById(id);
-        } catch (Exception e) {
-            return null;
-        }
+        return blogpostService.findById(id);
+
     }
 
 
+    @DeleteMapping("/{id}")//DELETEBYID
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+     public void findByIdAndDelete(@PathVariable int id) {
+        blogpostService.findByIdAndDelete(id);
+
+    }
+
+    @GetMapping //ritora lista blog
+    List<BlogPost> getAllBlog() {
+        return blogpostService.getAllBlog();
+
+    }
 
 
+    @PutMapping("/{id}") //findby id e aggiorna
+    BlogPost findAndUpdateById(@PathVariable int id, @RequestBody BlogPost blogPost) {
+        return blogpostService.findAndUpdateById(id, blogPost);
 
-
-
+    }
 
 }
