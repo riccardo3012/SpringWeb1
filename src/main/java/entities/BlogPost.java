@@ -1,19 +1,26 @@
 package entities;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.*;
+import lombok.*;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Getter
 @Setter
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Entity
+@Table(name = "blog_posts")
 public class BlogPost {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String categoria;
     private String titolo;
     private String cover;
     private String contenuto;
+    @Column(name = "tempo_lettura")
     private int tempoLettura;
 
 
@@ -30,5 +37,8 @@ public class BlogPost {
 
   }
 
+    @ManyToOne
+    @JoinColumn(name = "author_id")
+    private User user;
 
 }

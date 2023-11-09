@@ -21,7 +21,7 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     User save(@RequestBody User user) {
         return userService.save(user);
-        
+
     }
 
     @GetMapping("/{id}")
